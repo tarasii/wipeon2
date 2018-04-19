@@ -1,0 +1,159 @@
+{% extends "layout.html" %}
+{% block scripts %}
+    <script>
+        var category_dict = { {% for name, bar in categories_all.items() %} "{{ name }}":"{{ bar }}", {% endfor %} };
+        //console.log(category_dict)
+    </script>
+    <script src="/static/test.js"></script>
+{% endblock %}
+{% block body %}
+    <div class="metanav">
+        {% if not session.logged_in %}
+            <a href="{{ url_for('login') }}">Edit</a>
+        {% else %}
+            <a href="{{ url_for('logout') }}">Cancel</a>
+        {% endif %}
+    </div>
+    <form name ="settings" action="{{ url_for('go') }}" method="POST">
+        <h2>{% if not session.logged_in %}Info:{% else %}Settings:{% endif %}</h2>
+        <table>
+            <tr>
+                <td>Enterprise name:</td>
+                <td><input name="enterprise" maxlength=2 value="{{ enterprise }}"{% if not session.logged_in %} disabled{% endif %}></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Template:</td>
+                <td>
+                    <select name="template"{% if not session.logged_in %} disabled{% endif %}>
+                    {% for name, value in templates_all.items() %}
+                        <option{% if template == name %} selected{% endif %} value = "{{ name }}">{{ value }}</option>
+                    {% endfor %}
+                    </select>
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Left</td>
+                <td>Right</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Line number:</td>
+                <td><input name="line_left" maxlength=2 value="{{ line_left }}"{% if not session.logged_in %} disabled{% endif %}></td>
+                <td><input name="line_right" maxlength=2 value="{{ line_right }}"{% if not session.logged_in %} disabled{% endif %}></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Egg color:</td>
+                <td>
+                    <select name="color_left"{% if not session.logged_in %} disabled{% endif %}>
+                    {% for name, value in colors_all.items() %}
+                        <option{% if color_left == name %} selected{% endif %} value = "{{ name }}">{{ value }}</option>
+                    {% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <select name="color_right"{% if not session.logged_in %} disabled{% endif %}>
+                    {% for name, value in colors_all.items() %}
+                        <option{% if color_right == name %} selected{% endif %} value = "{{ name }}">{{ value }}</option>
+                    {% endfor %}
+                    </select>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Egg category:</td>
+                <td>
+                    <select name="category_left" id="category_left" onchange="change_category('category_left')"{% if not session.logged_in %} disabled{% endif %}>
+                    {% for name in categories_all.keys() %}
+                        <option{% if category_left == name %} selected{% endif %} value = "{{ name }}">{{ name }}</option>
+                    {% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <select name="category_right" id="category_right" onchange="change_category('category_right')"{% if not session.logged_in %} disabled{% endif %}>
+                    {% for name in categories_all.keys() %}
+                        <option{% if category_right == name %} selected{% endif %} value = "{{ name }}">{{ name }}</option>
+                    {% endfor %}
+                    </select>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Product:</td>
+                <td>
+                    <select name="product_left" id="product_left" onchange="change_product('product_left')"{% if not session.logged_in %} disabled{% endif %}>
+                    {% for key, name in products_all.items() %}
+                        <option{% if product_left == key %} selected{% endif %} value = "{{ key }}">{{ name }}</option>
+                    {% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <select name="product_right" id="product_right" onchange="change_product('product_right')"{% if not session.logged_in %} disabled{% endif %}>
+                    {% for key, name in products_all.items() %}
+                        <option{% if product_right == key %} selected{% endif %} value = "{{ key }}">{{ name }}</option>
+                    {% endfor %}
+                    </select>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Barcode (EAN):</td>
+                <td><input name="barcodeEAN_left" id="barcodeEAN_left" maxlength=12 value="{{ barcodeEAN_left }}"{% if not session.logged_in %} disabled{% endif %}></td>
+                <td><input name="barcodeEAN_right" id="barcodeEAN_right" maxlength=12 value="{{ barcodeEAN_right }}"{% if not session.logged_in %} disabled{% endif %}></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Barcode (Code128):</td>
+                <td><input name="barcode_left" maxlength=20 value="{{ barcode_left }}" disabled></td>
+                <td><input name="barcode_right" maxlength=20 value="{{ barcode_right }}" disabled></td>
+                <td></td>
+            </tr>
+            {% if session.logged_in %}
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="Save">
+                    <input type="reset" value="Cancel">
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+            {% endif %}
+            <tr>
+                <td></td>
+                <td>Printed:</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Count:</td>
+                <td><input name="number" maxlength=12 value="{{ count }}" disabled></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Id:</td>
+                <td><input name="id" maxlength=12 value="{{ last_id }}" disabled></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Status:</td>
+                <td>{% if status == 0 %}<a href="{{ url_for('get_errors') }}">Error</a>{% else %}OK{% endif %}</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Barcode:</td>
+                <td><input name="last_barcode" maxlength=20 value="{{ barcode_last }}" disabled></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </form>
+{% endblock %}

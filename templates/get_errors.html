@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <a href="{{ url_for('go') }}">Back</a>
+    <h2>Errors</h2>
+    <table class="color">
+        <thead>
+            <th>Time</th>
+            <th>Barcode</th>
+            <th>Message</th>
+        </thead>
+        {% for error in errors %}
+        <tr>
+            <td>{{ error.0 }}</td>
+            <td>{{ error.1 }}</td>
+            <td>{{ error.2 }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

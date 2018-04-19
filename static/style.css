@@ -1,0 +1,20 @@
+
+h1 {
+    color:grey;
+}
+
+table.color {
+    border: 1px solid black;
+}
+
+table.color th, td {
+    padding: 3px;
+}
+
+table.color th {
+    background-color: #cccccc;
+}
+
+table.color tr:nth-child(even){
+    background-color: #eeeeee;
+}
