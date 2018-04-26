@@ -9,5 +9,6 @@ sudo cp wipeon.conf /etc/supervisor/conf.d/
 sudo supervisorctl update
 
 sudo apt-get install avahi-daemon
+sudo cp wipeon.service /etc/avahi/services/
 
 #python /home/pi/wipeon2/print_barcode.py buttons
