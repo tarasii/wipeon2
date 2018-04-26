@@ -121,6 +121,10 @@ def get_errors():
 
     return render_template('get_errors.html', errors=error_entries)
 
+@app.route("/all")
+def all_devices():
+    devices = ['10.2.195.84','10.2.195.85']
+    return render_template('all.html', devices=devices)
 
 if __name__=='__main__':
     app.run(host='0.0.0.0')

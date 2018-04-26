@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All wipons list</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <th>device</th>
+        </thead>
+        {% for x in devices %}
+        <tr>
+            <td><a href="http://{{ x }}:5000">{{ x }}</a> </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
