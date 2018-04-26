@@ -220,6 +220,8 @@ if __name__ == "__main__":
                 "        'q' - quit "
     print docstring #my_func.__doc__
     if 'buttons' in sys.argv:
+        print "buttons mode"
         button_print()
     else:
+        print "keyboard mode"
         keyboard_print()
