@@ -1,0 +1,5 @@
+[prigram:flask_app]
+command = python app.py
+directory = /home/pi/wipon2
+autostart = true
+autorestart = true
