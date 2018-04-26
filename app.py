@@ -123,7 +123,7 @@ def get_errors():
 
 @app.route("/all")
 def all_devices():
-    devices = ['10.2.195.84','10.2.195.85']
+    devices = ['10.2.195.84','10.2.195.85','10.2.195.87','10.2.195.99']
     return render_template('all.html', devices=devices)
 
 if __name__=='__main__':
