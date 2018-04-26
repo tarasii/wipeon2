@@ -109,8 +109,8 @@ def logout():
 @app.route('/get_settings')
 def get_settings():
     db = get_db()
-    settings_db = utill.get_settings(db)
-    settings_form = {x: settings_db.get(x, utill.default_settings[x]) for x in utill.default_settings.keys()}
+    settings_db = utill.get_raw_settings(db)
+    settings_form = utill.get_settings(settings_db)
     return jsonify(settings_form)
 
 @app.route('/get_errors')
@@ -123,4 +123,4 @@ def get_errors():
 
 
 if __name__=='__main__':
-    app.run()
+    app.run(host='0.0.0.0')
