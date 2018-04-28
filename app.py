@@ -1,6 +1,8 @@
 from flask import Flask, session, request, render_template, redirect, flash, url_for, g, jsonify
+import requests
 import os
 import utill
+import json
 
 from sqlite3 import dbapi2 as sqlite3
 
@@ -123,8 +125,31 @@ def get_errors():
 
 @app.route("/all")
 def all_devices():
-    devices = ['10.2.195.84','10.2.195.85','10.2.195.87','10.2.195.99']
-    return render_template('all.html', devices=devices)
+    devices = ['127.0.0.1','10.2.195.84','10.2.195.85','10.2.195.87','10.2.195.99']
+
+    empty_data = {x:"-" for x in utill.default_settings.keys()}
+
+    devices_status = []
+    for dev in devices:
+        uri = 'http://{}:5000/get_settings'.format(dev)
+        try:
+            uResponse = requests.get(uri, timeout=0.1)
+            data = uResponse.json()
+            res = "Connected"
+            print data
+        except requests.ConnectionError:
+            res = "No connected"
+            data = empty_data
+        except requests.Timeout:
+            res = "No connected"
+            data = empty_data
+
+        devices_status.append((dev, res, data['enterprise'],
+                               data['line_right'], data['category_right'], data['color_right'], data['product_right'], data['barcodeEAN_right'],
+                               data['line_left'], data['category_left'], data['color_left'], data['product_left'], data['barcodeEAN_left']))
+
+
+    return render_template('all.html', devices=devices, statuses=devices_status )
 
 if __name__=='__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', threaded=True)

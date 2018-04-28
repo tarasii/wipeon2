@@ -1,19 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>All wipons list</title>
-</head>
-<body>
+{% extends "layout.html" %}
+
+{% block body %}
     <table>
         <thead>
-            <th>device</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>Left</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>Right</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
         </thead>
-        {% for x in devices %}
+        <thead>
+            <th>Device</th>
+            <th>Status</th>
+            <th>Enterprise</th>
+            <th>Line</th>
+            <th>Category</th>
+            <th>Color</th>
+            <th>Product</th>
+            <th>EAN</th>
+            <th>Line</th>
+            <th>Category</th>
+            <th>Color</th>
+            <th>Product</th>
+            <th>EAN</th>
+        </thead>
+        {% for dev, status, ent, lr, ccr, cr, pr, br, ll, ccl, cl, pl, bl in statuses %}
         <tr>
-            <td><a href="http://{{ x }}:5000">{{ x }}</a> </td>
+            <td><a href="http://{{ dev }}:5000">{{ dev }}</a> </td>
+            <td>{{ status }}</td>
+            <td>{{ ent }}</td>
+            <td>{{ ll }}</td>
+            <td>{{ ccl }}</td>
+            <td>{{ cl }}</td>
+            <td>{{ pl }}</td>
+            <td>{{ bl }}</td>
+            <td>{{ lr }}</td>
+            <td>{{ ccr }}</td>
+            <td>{{ cr }}</td>
+            <td>{{ pr }}</td>
+            <td>{{ br }}</td>
         </tr>
         {% endfor %}
     </table>
-</body>
-</html>
+{% endblock %}
