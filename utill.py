@@ -71,7 +71,7 @@ def make_barcode(enterprise, line, count):
 
 def check_authorization(app, login, password):
     res = None
-    users = {'admin':'4badaee57fed5610012a296273158f5f', 'user':'bf92b982bc12d5cc22c403568f1eb9ba'}
+    users = {'admin':'4badaee57fed5610012a296273158f5f', 'user':'34acd41f245fe1d7efb3d7e5bb7ea07e'}
     #if login != app.config['USERNAME']:
     if login not in users.keys():
         res = 'Invalid username'
