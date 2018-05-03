@@ -135,7 +135,7 @@ def all_devices():
     for dev in devices:
         uri = 'http://{}:5000/get_settings'.format(dev)
         try:
-            uResponse = requests.get(uri, timeout=0.1)
+            uResponse = requests.get(uri, timeout=0.2)
             data = uResponse.json()
             res = "Connected"
             print data
