@@ -1,15 +1,13 @@
-UPBAR$ = "280000000005"
-EGG$ = "C+"
-EGGC$ = "B"
-LNUM$ = "02"
+UPBAR$ = "220000000000"
+EGG$ = "C2"
+EGGC$ = "W"
+LNUM$ = "01"
 ENT$ = "AA"
-ID$ = "000070"
-SIZE 60mm, 60mm
+ID$ = "000015"
+SIZE 60 mm, 60 mm
 CLS
-GAP 2mm
-BOX 10, 10, 470, 470, 1
-BARCODE 50, 20, "EAN13", 150,  0, 0, 4, 0, UPBAR$
-BARCODE 80, 260, "128", 170,  1, 0, 3, 3, ""+ENT$+LNUM$+ID$
-TEXT 100, 180, "2", 0, 5, 4, ""+EGG$+" "+EGGC$
+BARCODE 90, 50, "EAN13", 80,  0, 90, 6, 0, UPBAR$
+BARCODE 630, 650, "128", 120,  1, 270, 4, 3, ""+ENT$+LNUM$+ID$
+TEXT 120, 50, "2", 270, 1, 1, ""+EGG$+" "+EGGC$
 PRINT 1
 EOP

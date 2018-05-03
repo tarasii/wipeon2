@@ -1,9 +1,9 @@
-UPBAR$ = {barcodeEAN}
-EGG$ = {category}
-EGGC$ = {color}
-LNUM$ = {line}
-ENT$ = {enterprise}
-ID$ = {id}
+UPBAR$ = "{barcodeEAN}"
+EGG$ = "{category}"
+EGGC$ = "{color}"
+LNUM$ = "{line}"
+ENT$ = "{enterprise}"
+ID$ = "{id}"
 SIZE 60 mm, 60 mm
 CLS
 BARCODE 90, 50, "EAN13", 80,  0, 90, 6, 0, UPBAR$
