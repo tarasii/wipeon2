@@ -2,8 +2,9 @@
 
 cd /home/pi/wipeon2
 
+sudo apt-get update
 sudo apt-get install python-pip
-pip install --index-url=http://pypi.python.org/simple/ --upgrade pip
+sudo pip install --index-url=http://pypi.python.org/simple/ --upgrade pip
 
 pip install -r requirements.txt
 

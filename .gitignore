@@ -2,3 +2,4 @@ env/
 .idea
 *.pyc
 main
+raw/barcode.bas
